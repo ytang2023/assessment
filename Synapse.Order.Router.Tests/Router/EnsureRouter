@@ -1,0 +1,45 @@
+using System.Text.Json;
+using Synapse.Order.Router.DataProviders.Product;
+using Synapse.Order.Router.DataProviders.Supplier;
+using Synapse.Order.Router.Models;
+using Synapse.Order.Router.Router;
+
+namespace Synapse.Order.Router.Tests.Router;
+
+public sealed class EnsureRouter
+{
+    private static readonly RouterEngine Engine = new();
+    private static readonly IReadOnlyDictionary<string, Product> Products = new ProductDataProvider().GetProducts();
+    private static readonly IReadOnlyList<Supplier> Suppliers = new SupplierDataProvider().GetSuppliers();
+
+    public static IEnumerable<object[]> SampleOrders()
+    {
+        var json = File.ReadAllText(
+            Path.Combine(AppContext.BaseDirectory, "testdata", "sample_orders.json"));
+
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        var orders = JsonSerializer.Deserialize<List<OrderRequest>>(json, options)!;
+
+        return orders.Select(o => new object[] { o });
+    }
+
+    [Theory]
+    [MemberData(nameof(SampleOrders))]
+    public void Should_ReturnFeasibleRouting_CoveringAllItemsInSampleOrder(OrderRequest order)
+    {
+        var result = Engine.Route(order, Suppliers, Products);
+
+        Assert.True(result.Feasible,
+            $"Order {order.OrderId} should be feasible. Errors: {string.Join(", ", result.Errors ?? [])}");
+        Assert.NotNull(result.Routing);
+        Assert.NotEmpty(result.Routing!);
+
+        var routedCodes = result.Routing!
+            .SelectMany(a => a.Items)
+            .Select(i => i.ProductCode)
+            .ToHashSet();
+
+        foreach (var item in order.Items)
+            Assert.Contains(item.ProductCode, routedCodes);
+    }
+}

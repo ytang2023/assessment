@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Synapse.Order.Router": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7080",
+      "launchBrowser": false
+    }
+  }
+}
