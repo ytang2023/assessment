@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synapse.Order.Router", "Synapse.Order.Router.csproj", "{C88F38AA-7BD7-42A8-BF34-F072DA8171E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synapse.Order.Router", "Synapse.Order.Router\Synapse.Order.Router.csproj", "{C88F38AA-7BD7-42A8-BF34-F072DA8171E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synapse.Order.Router.Tests", "..\Synapse.Order.Router.Tests\Synapse.Order.Router.Tests.csproj", "{07751C98-0EA1-E437-EF8E-BF6627E68400}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Synapse.Order.Router.Tests", "Synapse.Order.Router.Tests\Synapse.Order.Router.Tests.csproj", "{07751C98-0EA1-E437-EF8E-BF6627E68400}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
