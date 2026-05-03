@@ -4,7 +4,7 @@ An Azure Functions (isolated worker, .NET 8) HTTP service that accepts an incomi
 
 Data is loaded at startup from embedded CSV files (products and suppliers). The service exposes a single `POST /api/route` endpoint documented via OpenAPI v3 / Swagger UI.
 
-The solution can be opened in **Visual Studio Code** or **Visual Studio 2022** — open the `.sln` file at the root of `Synapse.Order.Router/`.
+The solution can be opened in **Visual Studio Code** or **Visual Studio 2022** — open `Synapse.Order.Router.sln` at the repo root.
 
 ---
 
@@ -12,10 +12,9 @@ The solution can be opened in **Visual Studio Code** or **Visual Studio 2022** �
 
 ```
 assessment/
-├── tasks/                              # Source data files
-│   ├── products.csv
-│   ├── suppliers.csv
-│   └── sample_orders.json
+├── Synapse.Order.Router.sln            # Open this in Visual Studio 2022
+|
+├── tasks/                              # Assignment instructions and source data files
 │
 ├── Synapse.Order.Router/               # Main Azure Function project
 │   ├── API/
@@ -42,7 +41,7 @@ assessment/
 │   │   └── RouterService.cs            # DI-injected service; single try/catch boundary
 │   ├── Program.cs                      # DI wiring + OpenAPI configuration
 │   ├── host.json
-│   ├── local.settings.json             # Local-only; not committed
+    ├── local.settings.json             # Local dev settings (no secrets)
 │   ├── Dockerfile
 │   └── .dockerignore
 │
